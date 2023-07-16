@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+"use client";
 import axios from "axios";
-import sendMail from "./send-mail";
+import { useEffect } from "react";
 
-function App() {
+export default function Home() {
   async function grabIp(): Promise<void> {
     const res = await axios.get("https://api.ipify.org?format=json");
     // eslint-disable-next-line
     const ip: string = res.data.ip;
 
-    sendMail(ip);
+    fetch(`/mail?ip=${ip}`, {
+      method: "POST",
+    });
   }
 
   useEffect(() => {
@@ -17,5 +19,3 @@ function App() {
 
   return <p>Oops! Something went wrong</p>;
 }
-
-export default App;
