@@ -8,9 +8,11 @@ export default function Home() {
     // eslint-disable-next-line
     const ip: string = res.data.ip;
 
-    fetch(`/mail?ip=${ip}`, {
+    const postResponse = await fetch(`/api/mail?ip=${ip}`, {
       method: "POST",
     });
+
+    console.log(postResponse);
   }
 
   useEffect(() => {

@@ -1,8 +1,9 @@
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
   const ip = searchParams.get("ip");
+  console.log("Something happened!");
 
-  fetch("https://api.sendgrid.com/v3/mail/send", {
+  const res = await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
@@ -37,5 +38,5 @@ export async function POST(request: Request) {
     }),
   });
 
-  return new Response("Hello from the Workers API");
+  return res;
 }
